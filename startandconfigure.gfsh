@@ -1,0 +1,35 @@
+# Start locator
+start locator --name=locator
+
+# Set screen width
+set variable --name=APP_RESULT_VIEWER --value=any
+
+# Configure PDX
+configure pdx --read-serialized=true --disk-store=pdx_store
+
+# Start Servers
+start server --name=server-1 --server-port=0 --statistic-archive-file=cacheserver.gfs --J=-Dgemfire.log-file=cacheserver.log --J=-Dgemfire.conserve-sockets=false
+start server --name=server-2 --server-port=0 --statistic-archive-file=cacheserver.gfs --J=-Dgemfire.log-file=cacheserver.log --J=-Dgemfire.conserve-sockets=false
+start server --name=server-3 --server-port=0 --statistic-archive-file=cacheserver.gfs --J=-Dgemfire.log-file=cacheserver.log --J=-Dgemfire.conserve-sockets=false
+
+# List Members
+list members
+
+# Create Disk Stores
+create disk-store --name=pdx_store --dir=. --max-oplog-size=10
+create disk-store --name=data_store --dir=. --max-oplog-size=10
+
+# Deploy Functions
+deploy --jar=server/build/libs/server-0.0.1-SNAPSHOT.jar
+
+# List Functions
+list functions
+
+# Delay to allow Disk Stores to be known by the locator
+sleep --time=3
+
+# Create Regions
+create region --name=Customer --type=PARTITION_REDUNDANT_PERSISTENT --disk-store=data_store
+
+# List Regions
+list regions

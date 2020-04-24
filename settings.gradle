@@ -1,0 +1,2 @@
+rootProject.name = 'remove-unused-pdxtypes'
+include 'client','server'
