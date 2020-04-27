@@ -50,6 +50,12 @@ public class CustomerService {
     logger.info("Loaded {} PdxInstances in {} ms", numEntries, end-start);
   }
 
+  public void loadAddressTypes() {
+    this.customerTemplate.put("0", createAddress1());
+    this.customerTemplate.put("1", createAddress2());
+    this.customerTemplate.put("2", createAddress3());
+  }
+
   public void dumpPdxTypes() {
     logger.info("Dumped PdxTypes result={}", this.functions.dumpPdxTypes());
   }
@@ -97,5 +103,43 @@ public class CustomerService {
       + "]"
       + "}";
     return JSONFormatter.fromJSON(jsonCustomer);
+  }
+
+  private PdxInstance createAddress1() {
+    String jsonAddress =
+      "{"
+        + "\"address\": \"500 5th Avenue\","
+        + "\"city\": \"New York\","
+        + "\"state\": \"NY\","
+        + "\"zip\": \"10110\""
+        + "}";
+    return JSONFormatter.fromJSON(jsonAddress);
+  }
+
+  private PdxInstance createAddress2() {
+    String jsonAddress =
+      "{"
+        + "\"address1\": \"500 5th Avenue\","
+        + "\"address2\": \"Suite 100\","
+        + "\"city\": \"New York\","
+        + "\"state\": \"NY\","
+        + "\"zip\": \"10110\""
+        + "}";
+    return JSONFormatter.fromJSON(jsonAddress);
+  }
+
+  private PdxInstance createAddress3() {
+    String jsonAddress =
+      "{"
+        + "\"addresslines\":"
+        + "{"
+        + "\"address1\": \"500 5th Avenue\","
+        + "\"address2\": \"Suite 100\""
+        + "},"
+        + "\"city\": \"New York\","
+        + "\"state\": \"NY\","
+        + "\"zip\": \"10110\""
+        + "}";
+    return JSONFormatter.fromJSON(jsonAddress);
   }
 }

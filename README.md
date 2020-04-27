@@ -10,6 +10,7 @@ The **RemoveUnusedPdxTypesFunction**:
 - For each PdxInstance value, recursively removes all in use PdxTypes from the set of existing PdxTypes
 - Deletes any remaining PdxTypes from the PdxTypes region
 
+In addition, it provides a client from which to load and delete JSON data and to run the function.
 ## Caveats and Comments
 Here are a few caveats and comments:
 
@@ -364,7 +365,7 @@ Sample output from the *runclient.sh* script is:
 ./runclient.sh remove-unused-pdxtypes Customer true
 
 > Task :client:bootRun
-2020-04-24 16:31:47.159  INFO 31051 --- [           main] example.client.Client                    : Starting Client on boglesbymac.local with PID 31051
+2020-04-24 16:31:47.159  INFO 31051 --- [           main] example.client.Client                    : Starting Client on localhost with PID 31051
 2020-04-24 16:31:48.668  INFO 31051 --- [           main] example.client.Client                    : Started Client in 1.729 seconds (JVM running for 1.984)
 2020-04-24 16:31:48.969  INFO 31051 --- [           main] example.client.service.CustomerService   : Removed unused PdxTypes in 300 ms with result=PdxTypeStatus{numExisting=102, numInUse=52, numUnused=50}
 ```

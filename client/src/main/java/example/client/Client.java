@@ -53,6 +53,9 @@ public class Client {
       case "load-destroy":
         this.service.loadDestroy(Integer.parseInt(parameter1));
         break;
+      case "load-address-types":
+        this.service.loadAddressTypes();
+        break;
       case "dump-pdxtypes":
         this.service.dumpPdxTypes();
         break;
